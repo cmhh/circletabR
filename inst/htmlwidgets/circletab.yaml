@@ -1,0 +1,13 @@
+dependencies:
+  - name: vue
+    version: 3.5.17
+    src: htmlwidgets/lib/vue-3.5.17
+    script:
+      - vue.global.prod.js
+  - name: circletab
+    version: 0.0.1
+    src: htmlwidgets/lib/circletab-0.0.1
+    script:
+      - circletab.umd.js
+    stylesheet:
+      - circletab.css

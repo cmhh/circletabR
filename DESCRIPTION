@@ -1,0 +1,14 @@
+Package: circletabR
+Title: Make tables where data is represented as circles.
+Version: 0.0.1
+Authors@R: 
+    person("Chris", "Hansen", , "cmhhansen@outlook.com", role = c("aut", "cre"))
+Description: Make tables where data is represented as circles.
+License: use_gpl3_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
