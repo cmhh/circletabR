@@ -36,7 +36,15 @@ reshape_data <- function(data) {
 #' @export
 #'
 #' @examples
-#' "hi"
+#' set.seed(1234)
+#'
+#' d <- data.frame(
+#'   g1 = rep(c("Foo", "Bar", "Baz"), each = 3),
+#'   g2 = rep(c("A", "B", "C"), 3),
+#'   value = runif(9)
+#' )
+#'
+#' circletab(d, max_value = 1)
 circletab <- function(
   data,
   max_value,
@@ -51,11 +59,12 @@ circletab <- function(
     data = jsonlite::toJSON(
       reshape_data(data), auto_unbox = TRUE
     ) |> as.character(),
-    maxVal = max_value,
     fillColor = fill_color,
     strokeWidth = stroke_width,
     strokeColor = stroke_color
   )
+
+  if (!missing(max_value)) x[["maxVal"]] <- max_value
 
   # create widget
   htmlwidgets::createWidget(
@@ -86,7 +95,9 @@ circletab <- function(
 #'
 #' @export
 circletabOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'circletab', width, height, package = 'circletabR')
+  htmlwidgets::shinyWidgetOutput(
+    outputId, 'circletab', width, height, package = 'circletabR'
+  )
 }
 
 #' @rdname circletab-shiny

@@ -5,23 +5,17 @@
 \title{Table with circles}
 \usage{
 circletab(
-  title,
-  description,
-  data = data.frame(),
+  data,
   max_value,
-  fill_color,
-  stroke_width,
-  stroke_color,
+  fill_color = "rgba(59, 130, 246, .5)",
+  stroke_width = 2,
+  stroke_color = "#333",
   width = "100\%",
   height = "auto",
   elementId = NULL
 )
 }
 \arguments{
-\item{title}{Title}
-
-\item{description}{Description}
-
 \item{data}{Data frame with three columns with two categorical variables and a single measure (count, proportion, etc.)}
 
 \item{width}{Width}
@@ -42,5 +36,13 @@ circletab(
 Table where values are represented as circles of varying size.
 }
 \examples{
-"hi"
+set.seed(1234)
+
+d <- data.frame(
+  g1 = rep(c("Foo", "Bar", "Baz"), each = 3),
+  g2 = rep(c("A", "B", "C"), 3),
+  value = runif(9)
+)
+
+circletab(d, max_value = 1)
 }

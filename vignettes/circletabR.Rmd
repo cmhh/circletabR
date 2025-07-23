@@ -1,0 +1,50 @@
+---
+title: "`circletabR`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{circletabR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+div.compare-brands {
+  margin-bottom: 20px;
+}
+
+.compare-brands img {
+  border: none;
+}
+</style>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#| echo: false
+library(circletabR)
+```
+
+The `circletabR` package currently provides a single function, `circletab` which can be used to produce a table where data values are represented as circles of varying size.  Consider the following data frame:
+
+```{r, echo = FALSE}
+set.seed(1234)
+
+d <- data.frame(
+  g1 = rep(c("Foo", "Bar", "Baz"), each = 3),
+  g2 = rep(c("A", "B", "C"), 3), 
+  value = runif(9)
+)
+
+knitr::kable(d, format = "markdown")
+```
+
+Data frames must contain 3 columns.  The first column will be used as row labels, and the second will be used as column labels.  Calling `circletab` produces the following:
+
+```{r}
+circletab(d, max_value = 1)
+```
