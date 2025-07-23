@@ -1,8 +1,27 @@
-#' Net Promoter Score
+#' Format dataset
 #'
-#' Net promoter score compoenent for Telco providers.
-#' @param title Title
-#' @param description Description
+#' @param data data Data frame with three columns with two categorical variables and a single measure (count, proportion, etc.)
+reshape_data <- function(data) {
+  v1 <- unique(data[,1])
+  v2 <- unique(data[,2])
+
+  data_ <- list()
+  for(v1_ in v1) {
+    x <- data[data[,1] == v1_,]
+    values <- lapply(v2, \(v2_) {
+      x[x[,2] == v2_, colnames(data)[3]]
+    }) |> setNames(v2)
+
+    data_[[length(data_) + 1]] <- list(outcome = v1_, values = values)
+  }
+
+  data_
+}
+
+#' Table with circles
+#'
+#' Table where values are represented as circles of varying size.
+#'
 #' @param data Data frame with three columns with two categorical variables and a single measure (count, proportion, etc.)
 #' @param max_val Lower and upper values for bar track
 #' @param bar_color Bar color
@@ -19,20 +38,20 @@
 #' @examples
 #' "hi"
 circletab <- function(
-  title,
-  description,
-  data = data.frame(),
+  data,
   max_value,
-  fill_color,
-  stroke_width,
-  stroke_color,
-  width = "100%", height = "auto", elementId = NULL
+  fill_color = "rgba(59, 130, 246, .5)",
+  stroke_width = 2,
+  stroke_color = "#333",
+  width = "100%", height = "auto",
+  elementId = NULL
 ) {
-
   # forward options using x
   x = list(
-    data = jsonlite::toJSON(data) |> as.character(),
-    maxValue = max_value,
+    data = jsonlite::toJSON(
+      reshape_data(data), auto_unbox = TRUE
+    ) |> as.character(),
+    maxVal = max_value,
     fillColor = fill_color,
     strokeWidth = stroke_width,
     strokeColor = stroke_color
@@ -70,7 +89,7 @@ circletabOutput <- function(outputId, width = '100%', height = '400px'){
   htmlwidgets::shinyWidgetOutput(outputId, 'circletab', width, height, package = 'circletabR')
 }
 
-#' @rdname telcowidgets-shiny
+#' @rdname circletab-shiny
 #' @export
 renderCircletab <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted

@@ -9,13 +9,13 @@ HTMLWidgets.widget({
     const app = Vue.createApp({})
     app.component('circle-tab', circletab.CircleTab)
 
-    const nps = document.createElement("compare-brands")
+    const nps = document.createElement("circle-tab")
     container.appendChild(nps)
 
     return {
       renderValue: function(x) {
         nps.setAttribute(":data", x.data)
-        nps.setAttribute(":max-value", x.maxVal)
+        nps.setAttribute(":max-val", x.maxVal)
         nps.setAttribute("fill-color", x.fillColor)
         nps.setAttribute("stroke-width", x.strokeWidth)
         nps.setAttribute("stroke-color", x.strokeColor)

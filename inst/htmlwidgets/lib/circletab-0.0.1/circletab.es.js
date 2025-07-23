@@ -1,5 +1,5 @@
 import { ref as h, computed as o, onMounted as b, createElementBlock as y, openBlock as $, createElementVNode as x } from "vue";
-const g = ["innerHTML"], _ = {
+const g = ["innerHTML"], w = {
   __name: "CircleTab",
   props: {
     data: {
@@ -27,32 +27,38 @@ const g = ["innerHTML"], _ = {
     }
   },
   setup(i) {
-    const e = i, c = h(null), u = (t) => `
+    const t = i, u = h(null), v = (e) => (console.log(`v: ${e}, mx.value: ${c.value}, r: ${e / 2 / c.value * 100}`), `
   <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle 
-      cx="50" 
-      cy="50" 
-      r="${t / 2 / v.value * 100}" 
-      stroke="${e.strokeColor}" 
-      stroke-width="${e.strokeWidth}" 
-      fill="${e.fillColor}" 
+    <circle
+      cx="50"
+      cy="50"
+      r="${e / 2 / c.value * 100}"
+      stroke="${t.strokeColor}"
+      stroke-width="${t.strokeWidth}"
+      fill="${t.fillColor}"
     />
   </svg>
-  `;
+  `);
     o(() => {
-      const t = e.data.map((r) => Math.min(...Object.values(r.values)));
-      return Math.min(...t);
+      const e = t.data.map((r) => Math.min(...Object.values(r.values)));
+      return Math.min(...e);
     });
-    const v = o(() => {
-      if (e.maxVal) return e.maxVal;
-      const t = e.data.map((r) => Math.max(...Object.values(r.values)));
-      return Math.min(...t);
+    const c = o(() => {
+      if (t.maxVal) return t.maxVal;
+      const e = t.data.map((r) => Math.max(...Object.values(r.values)));
+      return Math.max(...e);
     });
-    o(() => e.data.map((t) => t.outcome));
-    const d = o(() => Object.keys(e.data[0].values)), m = o(() => "<th></th>" + d.value.map((t) => `<th>${t}</th>`).join("")), p = o(() => e.data.map((t) => {
-      const r = `<td>${t.outcome}</td>`, s = d.value.map((n) => {
-        const a = t.values[n];
-        return `<td class=data><div class=circ>${u(a)}</div><div class=value><p>${a}</p></div><div class="tooltip hidden">${a}</div></td>`;
+    o(() => t.data.map((e) => e.outcome));
+    const d = o(() => Object.keys(t.data[0].values)), m = o(() => "<th></th>" + d.value.map((e) => `<th>${e}</th>`).join("")), p = o(() => t.data.map((e) => {
+      const r = `<td>${e.outcome}</td>`, s = d.value.map((n) => {
+        const a = e.values[n];
+        return `
+        <td class=data>
+          <div class=circ>${v(a)}</div>
+          <div class=value><p>${a}</p></div>
+          <div class="tooltip hidden">${a}</div>
+        </td>
+      `;
       }).join("");
       return `<tr>${r}${s}</tr>`;
     }).join("")), f = o(() => `
@@ -64,7 +70,7 @@ const g = ["innerHTML"], _ = {
   </tbody>
   `);
     return b(() => {
-      const r = c.value.querySelectorAll("td.data");
+      const r = u.value.querySelectorAll("td.data");
       for (var s = 0; s < r.length; s++) {
         const n = r[s].querySelector("div.circ > svg > circle"), a = r[s].querySelector("div.tooltip");
         n.addEventListener("mouseover", (l) => {
@@ -75,10 +81,10 @@ const g = ["innerHTML"], _ = {
           l.preventDefault(), a.style.left = l.offsetX - 5 + "px", a.style.top = l.offsetY - a.offsetHeight - 5 + "px";
         });
       }
-    }), (t, r) => ($(), y("div", null, [
+    }), (e, r) => ($(), y("div", null, [
       x("table", {
         ref_key: "tabContainer",
-        ref: c,
+        ref: u,
         innerHTML: f.value,
         class: "circle-tab"
       }, null, 8, g)
@@ -86,5 +92,5 @@ const g = ["innerHTML"], _ = {
   }
 };
 export {
-  _ as CircleTab
+  w as CircleTab
 };

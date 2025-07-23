@@ -26,68 +26,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 #| echo: false
-library(circletab)
+library(circletabR)
 ```
 
 The `circletabR` package currently provides a single function, `circletab` which can be used to produce a table where data values are represented as circles of varying size.
-
-Consider the following dataset, saved as `data_1`:
-
-```{r}
-#| echo: false
-data_1 <- data.frame(
-  brand = c("onenz", "skinny", "spark", "2degrees"),
-  value = c(45, 49, 43, 54)
-)
-
-knitr::kable(data_1, format = "markdown")
-```
-
-We can display these scores as follows:
-
-```{r}
-#| echo: true
-net_promoter_score(
-  title = "Speed of resolution",
-  description = paste(c(
-    "Measures satisfaction as how quickly providers resolve customer service ",
-    "issues (higher is better)."
-  ), collapse = ""),
-  data = data_1,
-  unit = "%",
-  range = c(0,100),
-  bar_color = rgb(176, 12, 41, maxColorValue = 255),
-  font_color = rgb(176, 12, 41, maxColorValue = 255)
-)
-```
-
-Similarly, consider the following data, saved as `data_2`:
-
-```{r}
-#| echo: false
-data_2 <- data.frame(
-  brand = c(
-    "contact", "mercury", "onenz", "skinny", "slingshot", "spark", "2degrees"
-  ),
-  value = c(-1, -11, -2, 11, 2, 2, 4)
-)
-
-knitr::kable(data_2, format = "markdown")
-```
-
-We can display these scores as follows:
-
-```{r}
-#| echo: true
-net_promoter_score(
-  title = "Net Promoter Score (NPS)",
-  description = paste(c(
-    "Mesaures how likely customers are to recommend their provider to friends ",
-    "and family (higher is better)."
-  ), collapse = ""),
-  data = data_2,
-  range = c(-20, 20),
-  bar_color = rgb(63, 94, 88, maxColorValue = 255),
-  font_color = rgb(63, 94, 88, maxColorValue = 255)
-)
-```
