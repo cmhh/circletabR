@@ -1,5 +1,5 @@
 import { ref as f, computed as l, onMounted as b, createElementBlock as y, openBlock as $, createElementVNode as x } from "vue";
-const g = ["innerHTML"], w = {
+const g = ["innerHTML"], k = {
   __name: "CircleTab",
   props: {
     data: {
@@ -78,7 +78,7 @@ const g = ["innerHTML"], w = {
         }), n.addEventListener("mouseleave", (o) => {
           o.preventDefault(), a.classList.add("hidden");
         }), n.addEventListener("mousemove", (o) => {
-          o.preventDefault(), a.style.left = o.pageX + 5 - 1 + "px", a.style.top = o.pageY - a.offsetHeight + 1 + "px";
+          o.preventDefault(), a.style.left = o.pageX + 5 - window.scrollX - 1 + "px", a.style.top = o.pageY - a.offsetHeight - window.scrollY + 1 + "px";
         });
       }
     }), (e, r) => ($(), y("div", null, [
@@ -92,5 +92,5 @@ const g = ["innerHTML"], w = {
   }
 };
 export {
-  w as CircleTab
+  k as CircleTab
 };
