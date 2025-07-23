@@ -1,25 +1,25 @@
-var circletab=function(c,t){"use strict";const m=["innerHTML"],p={__name:"CircleTab",props:{data:{type:Object,required:!0},maxVal:{type:Number,required:!1},fillColor:{type:String,required:!1,default:"rgba(59, 130, 246, .5)"},strokeWidth:{type:Number,required:!1,default:2},strokeColor:{type:String,required:!1,default:"#666"}},setup(v){const r=v,i=t.ref(null),f=e=>(console.log(`v: ${e}, mx.value: ${d.value}, r: ${e/2/d.value*100}`),`
+var circletab=function(c,e){"use strict";const m=["innerHTML"],p={__name:"CircleTab",props:{data:{type:Object,required:!0},maxVal:{type:Number,required:!1},fillColor:{type:String,required:!1,default:"rgba(59, 130, 246, .5)"},strokeWidth:{type:Number,required:!1,default:2},strokeColor:{type:String,required:!1,default:"#666"}},setup(v){const o=v,i=e.ref(null),h=t=>{const r=Math.sqrt(d.value/Math.PI),l=t/d.value,a=Math.sqrt(l/Math.PI)/r*50-o.strokeWidth;return console.log(`v: ${t}, mx.value: ${d.value}, r: ${a}`),`
   <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <circle
       cx="50"
       cy="50"
-      r="${e/2/d.value*100-r.strokeWidth}"
-      stroke="${r.strokeColor}"
-      stroke-width="${r.strokeWidth}"
-      fill="${r.fillColor}"
+      r="${a}"
+      stroke="${o.strokeColor}"
+      stroke-width="${o.strokeWidth}"
+      fill="${o.fillColor}"
     />
   </svg>
-  `);t.computed(()=>{const e=r.data.map(a=>Math.min(...Object.values(a.values)));return Math.min(...e)});const d=t.computed(()=>{if(r.maxVal)return r.maxVal;const e=r.data.map(a=>Math.max(...Object.values(a.values)));return Math.max(...e)});t.computed(()=>r.data.map(e=>e.outcome));const u=t.computed(()=>Object.keys(r.data[0].values)),h=t.computed(()=>"<th></th>"+u.value.map(e=>`<th>${e}</th>`).join("")),b=t.computed(()=>r.data.map(e=>{const a=`<td>${e.outcome}</td>`,n=u.value.map(s=>{const o=e.values[s];return`
+  `};e.computed(()=>{const t=o.data.map(r=>Math.min(...Object.values(r.values)));return Math.min(...t)});const d=e.computed(()=>{if(o.maxVal)return o.maxVal;const t=o.data.map(r=>Math.max(...Object.values(r.values)));return Math.max(...t)});e.computed(()=>o.data.map(t=>t.outcome));const u=e.computed(()=>Object.keys(o.data[0].values)),f=e.computed(()=>"<th></th>"+u.value.map(t=>`<th>${t}</th>`).join("")),b=e.computed(()=>o.data.map(t=>{const r=`<td>${t.outcome}</td>`,l=u.value.map(s=>{const a=t.values[s];return`
         <td class=data>
-          <div class=circ>${f(o)}</div>
-          <div class="value hidden"><p>${o}</p></div>
-          <div class="tooltip hidden"><p>${o}</p></div>
+          <div class=circ>${h(a)}</div>
+          <div class="value hidden"><p>${a}</p></div>
+          <div class="tooltip hidden"><p>${a}</p></div>
         </td>
-      `}).join("");return`<tr>${a}${n}</tr>`}).join("")),y=t.computed(()=>`
+      `}).join("");return`<tr>${r}${l}</tr>`}).join("")),y=e.computed(()=>`
   <thead>
-    ${h.value}
+    ${f.value}
   </thead>
   <tbody>
     ${b.value}
   </tbody>
-  `);return t.onMounted(()=>{const a=i.value.querySelectorAll("td.data");for(var n=0;n<a.length;n++){const s=a[n].querySelector("div.circ > svg > circle"),o=a[n].querySelector("div.tooltip");s.addEventListener("mouseenter",l=>{l.preventDefault(),o.classList.remove("hidden")}),s.addEventListener("mouseleave",l=>{l.preventDefault(),o.classList.add("hidden")}),s.addEventListener("mousemove",l=>{l.preventDefault(),o.style.left=l.pageX+5-window.scrollX-1+"px",o.style.top=l.pageY-o.offsetHeight-window.scrollY+1+"px"})}}),(e,a)=>(t.openBlock(),t.createElementBlock("div",null,[t.createElementVNode("table",{ref_key:"tabContainer",ref:i,innerHTML:y.value,class:"circle-tab"},null,8,m)]))}};return c.CircleTab=p,Object.defineProperty(c,Symbol.toStringTag,{value:"Module"}),c}({},Vue);
+  `);return e.onMounted(()=>{const r=i.value.querySelectorAll("td.data");for(var l=0;l<r.length;l++){const s=r[l].querySelector("div.circ > svg > circle"),a=r[l].querySelector("div.tooltip");s.addEventListener("mouseenter",n=>{n.preventDefault(),a.classList.remove("hidden")}),s.addEventListener("mouseleave",n=>{n.preventDefault(),a.classList.add("hidden")}),s.addEventListener("mousemove",n=>{n.preventDefault(),a.style.left=n.pageX+5-window.scrollX-1+"px",a.style.top=n.pageY-a.offsetHeight-window.scrollY+1+"px"})}}),(t,r)=>(e.openBlock(),e.createElementBlock("div",null,[e.createElementVNode("table",{ref_key:"tabContainer",ref:i,innerHTML:y.value,class:"circle-tab"},null,8,m)]))}};return c.CircleTab=p,Object.defineProperty(c,Symbol.toStringTag,{value:"Module"}),c}({},Vue);

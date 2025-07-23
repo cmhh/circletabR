@@ -27,40 +27,43 @@ const g = ["innerHTML"], k = {
     }
   },
   setup(i) {
-    const t = i, d = f(null), v = (e) => (console.log(`v: ${e}, mx.value: ${c.value}, r: ${e / 2 / c.value * 100}`), `
+    const a = i, d = f(null), v = (e) => {
+      const t = Math.sqrt(c.value / Math.PI), o = e / c.value, r = Math.sqrt(o / Math.PI) / t * 50 - a.strokeWidth;
+      return console.log(`v: ${e}, mx.value: ${c.value}, r: ${r}`), `
   <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <circle
       cx="50"
       cy="50"
-      r="${e / 2 / c.value * 100 - t.strokeWidth}"
-      stroke="${t.strokeColor}"
-      stroke-width="${t.strokeWidth}"
-      fill="${t.fillColor}"
+      r="${r}"
+      stroke="${a.strokeColor}"
+      stroke-width="${a.strokeWidth}"
+      fill="${a.fillColor}"
     />
   </svg>
-  `);
+  `;
+    };
     l(() => {
-      const e = t.data.map((r) => Math.min(...Object.values(r.values)));
+      const e = a.data.map((t) => Math.min(...Object.values(t.values)));
       return Math.min(...e);
     });
     const c = l(() => {
-      if (t.maxVal) return t.maxVal;
-      const e = t.data.map((r) => Math.max(...Object.values(r.values)));
+      if (a.maxVal) return a.maxVal;
+      const e = a.data.map((t) => Math.max(...Object.values(t.values)));
       return Math.max(...e);
     });
-    l(() => t.data.map((e) => e.outcome));
-    const u = l(() => Object.keys(t.data[0].values)), p = l(() => "<th></th>" + u.value.map((e) => `<th>${e}</th>`).join("")), m = l(() => t.data.map((e) => {
-      const r = `<td>${e.outcome}</td>`, s = u.value.map((n) => {
-        const a = e.values[n];
+    l(() => a.data.map((e) => e.outcome));
+    const u = l(() => Object.keys(a.data[0].values)), p = l(() => "<th></th>" + u.value.map((e) => `<th>${e}</th>`).join("")), m = l(() => a.data.map((e) => {
+      const t = `<td>${e.outcome}</td>`, o = u.value.map((n) => {
+        const r = e.values[n];
         return `
         <td class=data>
-          <div class=circ>${v(a)}</div>
-          <div class="value hidden"><p>${a}</p></div>
-          <div class="tooltip hidden"><p>${a}</p></div>
+          <div class=circ>${v(r)}</div>
+          <div class="value hidden"><p>${r}</p></div>
+          <div class="tooltip hidden"><p>${r}</p></div>
         </td>
       `;
       }).join("");
-      return `<tr>${r}${s}</tr>`;
+      return `<tr>${t}${o}</tr>`;
     }).join("")), h = l(() => `
   <thead>
     ${p.value}
@@ -70,18 +73,18 @@ const g = ["innerHTML"], k = {
   </tbody>
   `);
     return b(() => {
-      const r = d.value.querySelectorAll("td.data");
-      for (var s = 0; s < r.length; s++) {
-        const n = r[s].querySelector("div.circ > svg > circle"), a = r[s].querySelector("div.tooltip");
-        n.addEventListener("mouseenter", (o) => {
-          o.preventDefault(), a.classList.remove("hidden");
-        }), n.addEventListener("mouseleave", (o) => {
-          o.preventDefault(), a.classList.add("hidden");
-        }), n.addEventListener("mousemove", (o) => {
-          o.preventDefault(), a.style.left = o.pageX + 5 - window.scrollX - 1 + "px", a.style.top = o.pageY - a.offsetHeight - window.scrollY + 1 + "px";
+      const t = d.value.querySelectorAll("td.data");
+      for (var o = 0; o < t.length; o++) {
+        const n = t[o].querySelector("div.circ > svg > circle"), r = t[o].querySelector("div.tooltip");
+        n.addEventListener("mouseenter", (s) => {
+          s.preventDefault(), r.classList.remove("hidden");
+        }), n.addEventListener("mouseleave", (s) => {
+          s.preventDefault(), r.classList.add("hidden");
+        }), n.addEventListener("mousemove", (s) => {
+          s.preventDefault(), r.style.left = s.pageX + 5 - window.scrollX - 1 + "px", r.style.top = s.pageY - r.offsetHeight - window.scrollY + 1 + "px";
         });
       }
-    }), (e, r) => ($(), y("div", null, [
+    }), (e, t) => ($(), y("div", null, [
       x("table", {
         ref_key: "tabContainer",
         ref: d,
